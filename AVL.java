@@ -32,6 +32,7 @@ public class AVL<T extends Comparable<? super T>> extends BinarySearchTree<T>{
 		return leaf;
 	}
 	
+	/*
 	public BSTNode deleteRoot(){
 		root=remove(root.value, root);
 		return root;
@@ -58,8 +59,13 @@ public class AVL<T extends Comparable<? super T>> extends BinarySearchTree<T>{
         else leaf=leaf.right;
         return rebalance(leaf);
     }
+	*/
 	
-	
+	int height(BSTNode leaf){
+		 if(leaf==null)
+			 return -1;
+		 return Math.max(height(leaf.left), height(leaf.right))+1;
+	 }
 	
 	
 	//case 1
