@@ -85,7 +85,7 @@ public class WordCount {
         }
     }
 	public static void usage(){
-		System.err.print("Usage:	java WordCount [ -b | -a | -h ] [ -frequency | -num_unique ] <filename>\n"+
+		System.out.print("Usage:	java WordCount [ -b | -a | -h ] [ -frequency | -num_unique ] <filename>\n"+
 		"-b\tUse an Unbalanced BST to implement the DataCounter\n"+
 		"-a\tUse an AVL Tree\n"+
 		"-h\tUse a Hashtable\n"+
@@ -119,11 +119,16 @@ public class WordCount {
         	usage();
         	System.exit(2);
         }
+        
         counter=countWords(args[2], counter);
+
+        System.out.print("Size of counter: "+counter.getSize()+"\n");
     	DataCount<String>[] counts = counter.getCounts();
-        System.out.print("Size of counts: "+counts.length+"\n");
        // System.out.print(counter.dump());
         sortByDescendingCount(counts);
+
+        System.out.print("Size of counts: "+counts.length+"\n");
+        System.out.print("0: "+counts[0]+"\n");
         
         switch(args[1]) {
         case "-frequency":
