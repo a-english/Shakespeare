@@ -1,3 +1,10 @@
+
+/**
+ * Angela English
+ * CSC 130 MW 4-5:15
+ * Working alone
+ */
+
 /**
  * BSTCounter implements the DataCounter interface using a binary search tree to
  * store the data items and counts.
@@ -8,16 +15,9 @@
 public class BinarySearchTree<E extends Comparable<? super E>> implements
         DataCounter<E> {
 
-    /**
-     * The root of the binary search tree. root is null if and only if the tree
-     * is empty.
-     */
-    protected BSTNode overallRoot;
-
-    /**
-     * Number of nodes in the binary search tree.
-     */
-    protected int size;
+	
+    protected BSTNode overallRoot;	//null if empty
+    protected int size;		//number of nodes
 
     /**
      * Inner (non-static) class to represent a node in the tree. Each node
@@ -25,24 +25,10 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements
      * may be accessed by subclasses of BSTCounter.
      */
     protected class BSTNode {
-        /**
-         * The left child of this node.
-         */
+    	
         public BSTNode left;
-
-        /**
-         * The right child of this node.
-         */
         public BSTNode right;
-
-        /**
-         * The data element stored at this node.
-         */
         public E data;
-
-        /**
-         * The count for this data element.
-         */
         public int count;
 
         /**
@@ -70,11 +56,12 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements
     /** {@inheritDoc} */
     public void incCount(E data) {
         if (overallRoot == null) {
+        	//If empty, create new node
             overallRoot = new BSTNode(data);
         } else {
             // traverse the tree
             BSTNode currentNode = overallRoot;
-            while (true) {
+            while (true) {	//exits on return
 
                 // compare the data to be inserted with the data at the current
                 // node

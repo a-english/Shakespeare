@@ -1,3 +1,10 @@
+
+/**
+ * Angela English
+ * CSC 130 MW 4-5:15
+ * Working alone
+ */
+
 /**
  * An example of how to test your binary search tree. You should use this as
  * inspiration for your unit tests.

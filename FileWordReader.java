@@ -1,3 +1,10 @@
+
+/**
+ * Angela English
+ * CSC 130 MW 4-5:15
+ * Working alone
+ */
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

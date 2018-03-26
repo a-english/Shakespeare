@@ -1,6 +1,12 @@
 import java.io.IOException;
 
 /**
+ * Angela English
+ * CSC 130 MW 4-5:15
+ * Working alone
+ */
+
+/**
  * An executable that counts the words in a files and prints out the counts in
  * descending order. You will need to modify this file.
  */
@@ -79,6 +85,8 @@ public class WordCount {
             System.exit(1);
         }
         //TODO: handle modifiers
+        //First modifier handles datatype
+        //Second modifier determines sort of output
         countWords(args[2]);
     }
 }

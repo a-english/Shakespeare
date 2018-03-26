@@ -1,3 +1,10 @@
+
+/**
+ * Angela English
+ * CSC 130 MW 4-5:15
+ * Working alone
+ */
+
 /**
  * TODO Replace this comment with your own.
  * 

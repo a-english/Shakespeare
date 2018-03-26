@@ -1,3 +1,10 @@
+
+/**
+ * Angela English
+ * CSC 130 MW 4-5:15
+ * Working alone
+ */
+
 /**
  * Simple class to hold a piece of data and its count. The class has package
  * access so that the various implementations of DataCounter can access its
