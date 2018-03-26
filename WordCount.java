@@ -60,23 +60,25 @@ public class WordCount {
         }
     }
 	public static void usage(){
-		System.out.print("Usage:	java WordCount [ -b | -a | -h ] [ -frequency | -num_unique ] <filename>\n"+
+		System.err.print("Usage:	java WordCount [ -b | -a | -h ] [ -frequency | -num_unique ] <filename>\n"+
 		"-b\tUse an Unbalanced BST to implement the DataCounter\n"+
 		"-a\tUse an AVL Tree\n"+
 		"-h\tUse a Hashtable\n"+
-		"-frequency  	Print all the word/frequency pairs, ordered by frequency, \n"+
-		"				and then by the words in lexicographic order\n"+
-						
-		"-num_unique     Print the number of unique words in the document. \n"+
-		"				This is the total number of distinct (different) words in the \n"+
-		"				document. Words that appear more than onceare only counted \n"+
-		"				as a single word for this statistic.\n");
-	*/
+		"-frequency \tPrint all the word/frequency pairs, ordered by frequency, \n"+
+		"\t\tand then by the words in lexicographic order\n"+
+		"\n"+
+		"-num_unique \tPrint the number of unique words in the document. \n"+
+		"\t\tThis is the total number of distinct (different) words in the \n"+
+		"\t\tdocument. Words that appear more than onceare only counted \n"+
+		"\t\tas a single word for this statistic.\n");
+	}
+	
     public static void main(String[] args) {
         if (args.length != 3) {
-            System.err.println("Usage: filename of document to analyze");
+            usage();
             System.exit(1);
         }
-        countWords(args[0]);
+        //TODO: handle modifiers
+        countWords(args[2]);
     }
 }
