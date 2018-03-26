@@ -34,8 +34,6 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements
         /**
          * Create a new data node. Also takes care of incrementing the tree
          * size.
-         *
-         * @param data data element to be stored at this node.
          */
         public BSTNode(E data) {
             this.data = data;
@@ -45,15 +43,13 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements
         }
     }
 
-    /**
-     * Create an empty binary search tree.
-     */
+
     public BinarySearchTree() {
         overallRoot = null;
         size = 0;
     }
 
-    /** {@inheritDoc} */
+
     public void incCount(E data) {
         if (overallRoot == null) {
         	//If empty, create new node
@@ -90,12 +86,12 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements
         }
     }
 
-    /** {@inheritDoc} */
+    
     public int getSize() {
         return size;
     }
 
-    /** {@inheritDoc} */
+    
     public DataCount<E>[] getCounts() {
     	@SuppressWarnings("unchecked")
         DataCount<E>[] counts = new DataCount[size];
@@ -128,7 +124,8 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements
      *
      * @return a textual representation of the tree.
      */
-    protected String dump() {
+    //TODO: before submitting, make this function protected again
+    public String dump() {
         if (overallRoot != null)
             return dump(overallRoot);
         return "<empty tree>";
@@ -152,4 +149,5 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements
 
         return out;
     }
+    
 }

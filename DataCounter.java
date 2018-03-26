@@ -60,5 +60,11 @@ public interface DataCounter<E> {
      * @return an array of the data counts.
      */
     public DataCount<E>[] getCounts();
+    
+    /**
+     * Helper function for testing
+     */
+    
+    public String dump();
 
 }

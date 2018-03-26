@@ -12,8 +12,7 @@ import java.io.IOException;
  */
 public class WordCount {
 
-    private static void countWords(String file) {
-        DataCounter<String> counter = new BinarySearchTree<String>();
+    private static DataCounter<String> countWords(String file, DataCounter<String> counter) {
 
         try {
             FileWordReader reader = new FileWordReader(file);
@@ -26,13 +25,29 @@ public class WordCount {
             System.err.println("Error processing " + file + e);
             System.exit(1);
         }
+        
+        return counter;
 
-        DataCount<String>[] counts = counter.getCounts();
-        sortByDescendingCount(counts);
-        for (DataCount<String> c : counts)
-            System.out.println(c.count + " \t" + c.data);
+        /*
+         * refactoring this because I hate it
+         * 
+        
+            */
     }
 
+    /**
+     * Helper function, delete later
+     */
+
+	
+	public static void DumpArray(DataCount[] array) {
+		System.out.print("Size: "+array.length+"\n");
+		for(int i=0; i<array.length; i++)
+		{
+			System.out.print(i+"\t: "+array[i].data+"\t"+array[i].count+"\n");
+		}
+	}
+	
     /**
      * TODO Replace this comment with your own.
      * 
@@ -51,15 +66,19 @@ public class WordCount {
      * 
      * @param counts array to be sorted.
      */
-    private static <E extends Comparable<? super E>> void sortByDescendingCount(
-            DataCount<E>[] counts) {
+    private static <E extends Comparable<? super E>> void sortByDescendingCount(DataCount<E>[] counts) {
+    	//System.out.print("Pre sort array:\n");
+    	//DumpArray(counts);
         for (int i = 1; i < counts.length; i++) {
             DataCount<E> x = counts[i];
             int j;
             for (j = i - 1; j >= 0; j--) {
+            	//System.out.print("i:"+i+"\tj"+j+"\n");
+            	try {
                 if (counts[j].count >= x.count) {
                     break;
                 }
+            	}catch(NullPointerException e) {}
                 counts[j + 1] = counts[j];
             }
             counts[j + 1] = x;
@@ -84,9 +103,42 @@ public class WordCount {
             usage();
             System.exit(1);
         }
-        //TODO: handle modifiers
-        //First modifier handles datatype
-        //Second modifier determines sort of output
-        countWords(args[2]);
+        //won't compile unless this is initialized
+        DataCounter<String> counter=new BinarySearchTree<String>();
+        switch(args[0]) {
+        case "-b":
+        	counter=new BinarySearchTree<String>();
+        	break;
+        case "-a":
+        	counter=new AVL<String>();
+        	break;
+        case "-h":
+        	counter=new HashTable();
+        	break;
+        default:
+        	usage();
+        	System.exit(2);
+        }
+        counter=countWords(args[2], counter);
+    	DataCount<String>[] counts = counter.getCounts();
+        System.out.print("Size of counts: "+counts.length+"\n");
+       // System.out.print(counter.dump());
+        sortByDescendingCount(counts);
+        
+        switch(args[1]) {
+        case "-frequency":
+        case "-f":
+            for (DataCount<String> c : counts)
+                System.out.println(c.count + " \t" + c.data);
+        	break;
+        case "-num_unique":
+        case "-n":
+            for (DataCount<String> c : counts)
+                System.out.println(c.data);
+        	break;
+        default:
+        	usage();
+        }
+        
     }
 }

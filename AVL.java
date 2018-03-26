@@ -32,35 +32,6 @@ public class AVL<T extends Comparable<? super T>> extends BinarySearchTree<T>{
 		return leaf;
 	}
 	
-	/*
-	public BSTNode deleteRoot(){
-		root=remove(root.value, root);
-		return root;
-	}
-	
-	private BSTNode remove( T x, BSTNode leaf )
-    {
-        if( leaf == null )
-            return leaf;
-            
-        int compareResult = x.compareTo( leaf.value );
-            
-        if( compareResult < 0 )
-            leaf.setLeft(remove( x, leaf.left ));
-        else if( compareResult > 0 )
-            leaf.setRight(remove( x, leaf.right ));
-        else if( leaf.left != null && leaf.right != null ) // Two children
-        {
-            leaf.value = super.min( leaf.right ).value;
-            leaf.setRight(remove( leaf.value, leaf.right ));
-        }
-        else if(leaf.left!=null)
-        	leaf=leaf.left;
-        else leaf=leaf.right;
-        return rebalance(leaf);
-    }
-	*/
-	
 	int height(BSTNode leaf){
 		 if(leaf==null)
 			 return -1;

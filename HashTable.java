@@ -14,6 +14,7 @@
  * generic.  You need the String contents to write your hashcode code.
  */
 public class HashTable implements DataCounter<String> {
+	
 
     /** {@inheritDoc} */
     public DataCount<String>[] getCounts() {
