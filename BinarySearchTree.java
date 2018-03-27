@@ -150,4 +150,15 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements
         return out;
     }
     
+    /**
+     * Helper functions for debugging
+     */
+    public int height() {
+		 return height(overallRoot);
+	 }
+	 int height(BSTNode leaf){
+		 if(leaf==null)
+			 return -1;
+		 return Math.max(height(leaf.left), height(leaf.right))+1;
+	 }
 }

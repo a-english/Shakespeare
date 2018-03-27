@@ -11,10 +11,9 @@ public class AVL<E extends Comparable<? super E>> extends BinarySearchTree<E>{
 	
 	public void incCount(E x) {
 		super.incCount(x);
-		int before=this.size;
 		rebalance(overallRoot);
-		if(this.size!=before)
-			System.out.print("MAGIC!");
+		//remove later
+		TreePrinter tp = new TreePrinter(this);
 	}
 	
 	private BSTNode rebalance(BSTNode leaf){
