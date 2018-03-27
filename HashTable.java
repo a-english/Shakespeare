@@ -13,24 +13,24 @@
  * that HashTable works only with Strings, whereas the DataCounter interface is
  * generic.  You need the String contents to write your hashcode code.
  */
+
 public class HashTable implements DataCounter<String> {
-	static final int SIZE = 6997; 	//prime number large enough to keep lambda below 1
+	//static final int SIZE = 6997; 	//prime number large enough to keep lambda below 1. Shooting for 1/2-3/4 of array being filled
+	static final int SIZE = 131;
 	DataCount<String>[] table;
 	int size;
 	
 	public HashTable() {
 		table=new DataCount[SIZE];
 		size=0;
-		
-		dump();
 	}
 
     public DataCount<String>[] getCounts() {
     	DataCount<String>[] counts =  new DataCount[size];
     	int i=0;
-    	for(DataCount hashCell : table) {
+    	for(DataCount<String> hashCell : table) {
     		if(hashCell!=null) {
-    			counts[i]=new DataCount(hashCell.data, 1);
+    			counts[i]=new DataCount<String>(hashCell.data, 1);
     			i++;
     		}
     	}
@@ -42,32 +42,35 @@ public class HashTable implements DataCounter<String> {
     }
 
     public void incCount(String data) {
-        // TODO Auto-generated method stub
     	int hash=0; char temp;
+		//System.out.print(data+"=");
     	for(int i=0; i<data.length(); i++)
     	{
     		temp=data.charAt(i);
     		hash+=temp;
+    		//System.out.print(temp+"("+hash+")"+"+");
     	}
+		//System.out.print(" = "+hash+"\n");
     	//Hash now contains an int representing the sum of all the letters. Now let's hash.
     	hash=hash%SIZE;
-    	//that probably did nothing.
-    	if(table[hash]==null)
-    	{
-    		//this might not work, if uninitialized values are not stored as null
-    		//if that spot is empty, store the new entry.
-    		table[hash]=new DataCount(data, 1);
-    		
-    	}
-    	else
-    	{
-    		//if it is full, two things may have happened
-    		//1. either this is the same element and should be incremented
-    		//2. or the hash needs to be run again
-    		boolean found=false;
-    		int i=1;
-    		while(!found){
-    			if (table[hash].data==data)
+		boolean found=false;
+		int i=1;
+		while(!found){
+			//System.out.print("Trying "+hash+"\n");
+	    	if(table[hash]==null){
+	    		//if that spot is empty, store the new entry.
+	    		table[hash]=new DataCount<String>(data, 1);
+	    		//System.out.print("'"+data+"' placed in "+hash+"\n");
+	    		found=true;
+	    		
+	    	}else{
+	        	System.out.print(dump());
+	        	promptEnterKey();
+	    		System.out.print("Collision detected with '" + table[hash].data+"' at "+hash+"\n");
+	    		//if it is full, two things may have happened
+	    		//1. either this is the same element and should be incremented
+	    		//2. or the hash needs to be run again
+    			if (table[hash].data.equals(data))
     			{
     				//case 1
     				table[hash].count++;
@@ -79,11 +82,10 @@ public class HashTable implements DataCounter<String> {
     				//quadratic probing
     				hash=hash+i*i;
     				i++;
-    				
+    				System.out.print("Trying "+hash+"\n");
     			}
     		}
     	}
-
     }
     
     public String dump(){
@@ -95,7 +97,16 @@ public class HashTable implements DataCounter<String> {
     		else
     			dump+=table[i].data+"\t"+table[i].count+"\n";
     	}
-    	return "";
+    	return dump;
+    }
+    
+    public void promptEnterKey(){
+        System.out.println("Press \"ENTER\" to continue...");
+        try {
+            System.in.read();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 

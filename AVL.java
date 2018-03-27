@@ -12,9 +12,6 @@ public class AVL<E extends Comparable<? super E>> extends BinarySearchTree<E>{
 	public void incCount(E x) {
 		super.incCount(x);
 		overallRoot=rebalance(overallRoot);
-		//remove later
-		TreePrinter tp = new TreePrinter(this);
-		tp.print("After inserting '"+x+"'");
 	}
 	
 	private BSTNode rebalance(BSTNode leaf){

@@ -30,9 +30,7 @@ public class WordCount {
 
         /*
          * refactoring this because I hate it
-         * 
-        
-            */
+        */
     }
 
     /**
@@ -124,7 +122,7 @@ public class WordCount {
 
         System.out.print("Size of counter: "+counter.getSize()+"\n");
     	DataCount<String>[] counts = counter.getCounts();
-        System.out.print(counter.dump());
+        //System.out.print(counter.dump());
         sortByDescendingCount(counts);
 
         System.out.print("Size of counts: "+counts.length+"\n");
