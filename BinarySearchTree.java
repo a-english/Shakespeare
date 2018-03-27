@@ -41,6 +41,16 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements
             left = right = null;
             size++;
         }
+        
+        public BSTNode getLeft(){return left;}
+		
+		public BSTNode getRight(){return right;}
+		
+		public void setLeft(BSTNode node){left=node;}
+
+		public void setRight(BSTNode node){right=node;}
+        
+        
     }
 
 

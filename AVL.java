@@ -11,9 +11,10 @@ public class AVL<E extends Comparable<? super E>> extends BinarySearchTree<E>{
 	
 	public void incCount(E x) {
 		super.incCount(x);
-		rebalance(overallRoot);
+		overallRoot=rebalance(overallRoot);
 		//remove later
 		TreePrinter tp = new TreePrinter(this);
+		tp.print("After inserting '"+x+"'");
 	}
 	
 	private BSTNode rebalance(BSTNode leaf){
@@ -33,40 +34,40 @@ public class AVL<E extends Comparable<? super E>> extends BinarySearchTree<E>{
 			}
 		return leaf;
 	}
-	
-	int height(BSTNode leaf){
-		 if(leaf==null)
-			 return -1;
-		 return Math.max(height(leaf.left), height(leaf.right))+1;
-	 }
-	
+
 	
 	//case 1
 	private BSTNode singleRightRotation(BSTNode k2)
 	{
-		BSTNode k1 = k2.left;
-		k2.left=k1.right;
-		k1.right=k2;
+		//System.out.print("Doing a single right rotation on "+k2.getData()+"\n");
+		BSTNode k1 = k2.getLeft();
+		k2.setLeft(k1.getRight());
+		k1.setRight(k2);
+		//System.out.print("Returning: "+k1.print());	
 		return k1;
 	}
 	//case 4
 	private BSTNode singleLeftRotation(BSTNode k1)
 	{
-		BSTNode k2 = k1.right;
-		k1.right=k2.left;
-		k2.left=k1;
+		//System.out.print("Doing a single left rotation on "+k1.getData()+"\n");
+		BSTNode k2 = k1.getRight();
+		k1.setRight(
+				k2.getLeft());
+		k2.setLeft(k1);
 		return k2;
 	}
 	//case 2
 	private BSTNode doubleLeftRightRotation(BSTNode k3)
 	{
-		k3.left=singleLeftRotation(k3.left);
+		//System.out.print("Doing a double left right rotation\n");
+		k3.setLeft(singleLeftRotation(k3.getLeft()));
 		return singleRightRotation(k3); 
 	}
 	//case 3
 	private BSTNode doubleRightLeftRotation(BSTNode k1)
 	{
-		k1.right=singleRightRotation(k1.right);
+		//System.out.print("Doing a double right left rotation\n");
+		k1.setRight(singleRightRotation(k1.getRight()));
 		return singleLeftRotation(k1);
 	}
 }

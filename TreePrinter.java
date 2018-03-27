@@ -42,11 +42,16 @@ public class TreePrinter<E extends Comparable<? super E>> extends BinarySearchTr
      */
     public void print(String label)
     {       
+    	if(height>MAX_LEVELS)
+    	{
+            System.out.println("*** Too many levels to print. ***");
+    	}else {
         System.out.println(label);
 
         // Queue of nodes at this level.
         BSTNode thisLevelNodes[] = 
                 (BSTNode[]) new BSTNode[1];
+        
         
         int offset = POWERS_OF_2[(height+1)]-1;
         
@@ -81,7 +86,7 @@ public class TreePrinter<E extends Comparable<? super E>> extends BinarySearchTr
                 thisLevelNodes = nextLevel(level, thisLevelNodes);
             }
         }
-    }
+    }}
     
     /**
      * Print node data.
@@ -99,7 +104,7 @@ public class TreePrinter<E extends Comparable<? super E>> extends BinarySearchTr
             BSTNode node = levelNodes[i];
             
             if (node != null) {
-                System.out.printf("%3d ", node.data);
+                System.out.print(node.data);
             }
             else {
                 System.out.print("    ");
