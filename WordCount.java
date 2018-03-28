@@ -15,20 +15,13 @@ import java.io.IOException;
 public class WordCount {
 
 	String filename, flag;
-	DataCounter<String> counter;
-	
-	public WordCount(String file, String flag) {
-		try {
-            FileWordReader reader = new FileWordReader(file);
-            String word = reader.nextWord();
-            while (word != null) {
-                counter.incCount(word);
-                word = reader.nextWord();
-            }
-        } catch (IOException e) {
-            System.err.println("Error processing " + file + e);
-            System.exit(1);
-        }
+	private DataCounter<String> counter;
+
+	/**
+	 * Constructor takes in a filename and specifies a data structure. 
+	 * Fills that data structure with DataCount info from the file provided.
+	 */
+	public WordCount(String file, String flag){
 		switch(flag){
         case "-b":
         	counter=new BinarySearchTree<String>();
@@ -40,19 +33,26 @@ public class WordCount {
         	counter=new HashTable();
         	break;
         default:
-        	usage();
-        	System.exit(2);
+            System.err.println("Invalid input " + flag);
+            usage();
+            System.exit(2);
+        }
+		try {
+            FileWordReader reader = new FileWordReader(file);
+            String word = reader.nextWord();
+            while (word != null) {
+                counter.incCount(word);
+                word = reader.nextWord();
+            }
+        } catch (IOException e) {
+            System.err.println("Error processing " + file + e);
+            System.exit(1);
         }
 	}
 	/**
-	 * Takes in a filename and a data structure. 
-	 * Fills that data structure with DataCount info from the file provided.
-	 * Returns full data structure
+	 * Returns sorted data structure
 	 */
-    public DataCounter<String> countWords(String file, DataCounter<String> counter) {
-
-        
-        
+    public DataCounter<String> getCount() {
         return counter;
     }
 
@@ -71,6 +71,8 @@ public class WordCount {
 	
     /**
      * TODO Replace this comment with your own.
+     * TODO Use a different sort algo. Do not actually need to use this function anywhere else.
+     * Merge sort?
      * 
      * Sort the count array in descending order of count. If two elements have
      * the same count, they should be in alphabetical order (for Strings, that
@@ -122,24 +124,24 @@ public class WordCount {
     public static void main(String[] args) {
         if (args.length != 3) {
             usage();
-            System.exit(1);
+            System.exit(0);
         }
-        WordCount wc;
-        //won't compile unless this is initialized
-        DataCounter<String> counter=new BinarySearchTree<String>();
-        //args[0] contains data structure flag
+        String structureType = args[0],
+        	   outputType = args[1],
+        	   filename = args[2];
+                
+        WordCount wc=new WordCount(filename, structureType);
         
-        counter=countWords(args[2], counter);
 
         //System.out.print("Size of counter: "+counter.getSize()+"\n");
-    	DataCount<String>[] counts = counter.getCounts();
+    	DataCount<String>[] counts = wc.counter.getCounts();
         //System.out.print(counter.dump());
         sortByDescendingCount(counts);
 
         //System.out.print("Size of counts: "+counts.length+"\n");
         //System.out.print("0: "+counts[0]+"\n");
         
-        switch(args[1]) {
+        switch(outputType) {
         case "-frequency":
         case "-f":
             for (DataCount<String> c : counts)
