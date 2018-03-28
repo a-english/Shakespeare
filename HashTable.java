@@ -15,8 +15,8 @@
  */
 
 public class HashTable implements DataCounter<String> {
-	//static final int SIZE = 6997; 	//prime number large enough to keep lambda below 1. Shooting for 1/2-3/4 of array being filled
-	static final int SIZE = 131;
+	static final int SIZE = 6997; 	//prime number large enough to keep lambda below 1. Shooting for 1/2-3/4 of array being filled
+	//static final int SIZE = 131;
 	DataCount<String>[] table;
 	int size;
 	
@@ -91,6 +91,7 @@ public class HashTable implements DataCounter<String> {
     				//case 2
     				//quadratic probing
     				hash=hash+i*i;
+    				hash=hash%SIZE;
     				i++;
     				//System.out.print("Trying "+hash+"\n");
     			}

@@ -35,7 +35,6 @@ public class WordCount {
 
     /**
      * Helper function, delete later
-     */
 
 	
 	public static void DumpArray(DataCount[] array) {
@@ -45,6 +44,7 @@ public class WordCount {
 			System.out.print(i+"\t: "+array[i].data+"\t"+array[i].count+"\n");
 		}
 	}
+     */
 	
     /**
      * TODO Replace this comment with your own.
@@ -120,13 +120,13 @@ public class WordCount {
         
         counter=countWords(args[2], counter);
 
-        System.out.print("Size of counter: "+counter.getSize()+"\n");
+        //System.out.print("Size of counter: "+counter.getSize()+"\n");
     	DataCount<String>[] counts = counter.getCounts();
         //System.out.print(counter.dump());
         sortByDescendingCount(counts);
 
-        System.out.print("Size of counts: "+counts.length+"\n");
-        System.out.print("0: "+counts[0]+"\n");
+        //System.out.print("Size of counts: "+counts.length+"\n");
+        //System.out.print("0: "+counts[0]+"\n");
         
         switch(args[1]) {
         case "-frequency":
