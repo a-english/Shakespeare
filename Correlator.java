@@ -1,6 +1,8 @@
 
 public class Correlator {
 
+	public static final Double Frequency = 0.001;
+	public static final int FrequencyDivisor = (new Double(1/Frequency)).intValue();
 	
 	public static void usage(){
 		System.out.print("This program compares the word frequency of two different txt files.\n"+
@@ -19,8 +21,8 @@ public class Correlator {
 
 	public static void main(String[] args) {
 		DataCounter dc1, dc2;
-		
-		dc1=WordCount.countWords(args[2], dc1);
+		System.out.print("Denominator: " + FrequencyDivisor +"\n");
+		//dc1=WordCount.countWords(args[2], dc1);
 	}
 
 }

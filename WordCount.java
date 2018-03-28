@@ -8,13 +8,17 @@ import java.io.IOException;
 
 /**
  * An executable that counts the words in a files and prints out the counts in
- * descending order. You will need to modify this file.
+ * descending order.
+ * 
+ * Refactored into a class usable for Correlator
  */
 public class WordCount {
 
-    private static DataCounter<String> countWords(String file, DataCounter<String> counter) {
-
-        try {
+	String filename, flag;
+	DataCounter<String> counter;
+	
+	public WordCount(String file, String flag) {
+		try {
             FileWordReader reader = new FileWordReader(file);
             String word = reader.nextWord();
             while (word != null) {
@@ -25,12 +29,31 @@ public class WordCount {
             System.err.println("Error processing " + file + e);
             System.exit(1);
         }
+		switch(flag){
+        case "-b":
+        	counter=new BinarySearchTree<String>();
+        	break;
+        case "-a":
+        	counter=new AVL<String>();
+        	break;
+        case "-h":
+        	counter=new HashTable();
+        	break;
+        default:
+        	usage();
+        	System.exit(2);
+        }
+	}
+	/**
+	 * Takes in a filename and a data structure. 
+	 * Fills that data structure with DataCount info from the file provided.
+	 * Returns full data structure
+	 */
+    public DataCounter<String> countWords(String file, DataCounter<String> counter) {
+
+        
         
         return counter;
-
-        /*
-         * refactoring this because I hate it
-        */
     }
 
     /**
@@ -101,22 +124,10 @@ public class WordCount {
             usage();
             System.exit(1);
         }
+        WordCount wc;
         //won't compile unless this is initialized
         DataCounter<String> counter=new BinarySearchTree<String>();
-        switch(args[0]) {
-        case "-b":
-        	counter=new BinarySearchTree<String>();
-        	break;
-        case "-a":
-        	counter=new AVL<String>();
-        	break;
-        case "-h":
-        	counter=new HashTable();
-        	break;
-        default:
-        	usage();
-        	System.exit(2);
-        }
+        //args[0] contains data structure flag
         
         counter=countWords(args[2], counter);
 
