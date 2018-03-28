@@ -68,7 +68,7 @@ public class HashTable implements DataCounter<String> {
 	    		found=true;
 	    		
 	    	}else{
-	    		System.out.print("Collision detected placing '" + data+"' into '"+table[hash].data+"' at "+hash+"\n");
+	    		//System.out.print("Collision detected placing '" + data+"' into '"+table[hash].data+"' at "+hash+"\n");
 	        	//promptEnterKey();
 	        	//System.out.print(dump());
 	    		//if it is full, two things may have happened
@@ -77,7 +77,7 @@ public class HashTable implements DataCounter<String> {
     			if (table[hash].data.equals(data))
     			{
     				//case 1
-    	    		System.out.print("Same value. Incrementing.\n");
+    	    		//System.out.print("Same value. Incrementing.\n");
     				table[hash].count++;
     				found=true;
     			}
@@ -87,11 +87,12 @@ public class HashTable implements DataCounter<String> {
     				//quadratic probing
     				hash=hash+i*i;
     				i++;
-    				System.out.print("Trying "+hash+"\n");
+    				//System.out.print("Trying "+hash+"\n");
     			}
     		}
     	}
-		System.out.print("Successfully placed '" + data+"' into '"+table[hash].data+"' at "+hash+"\n");
+		//System.out.print("Successfully placed '" + data+"' into '"+table[hash].data+"' at "+hash+"\n");
+		size++;
     }
     
     public String dump(){
