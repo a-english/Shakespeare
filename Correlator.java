@@ -1,7 +1,6 @@
 
 public class Correlator {
 
-	DataCounter dc1, dc2;
 	
 	public static void usage(){
 		System.out.print("This program compares the word frequency of two different txt files.\n"+
@@ -17,14 +16,11 @@ public class Correlator {
 		"\t\tdocument. Words that appear more than onceare only counted \n"+
 		"\t\tas a single word for this statistic.\n");
 	}
-	
-	public Correlator() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		DataCounter dc1, dc2;
+		
+		dc1=WordCount.countWords(args[2], dc1);
 	}
 
 }
