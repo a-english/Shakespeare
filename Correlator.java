@@ -34,6 +34,15 @@ public class Correlator {
 		for(int i=0; i<length; i++){
 			System.out.println(dc1[i].data+" "+dc1[i].count+"\t"+dc2[i].data+" "+dc2[i].count);
 		}
+		
+		int index;
+		for(DataCount entry : dc1) {
+			index=find(dc2, entry);
+			if(index==-1)
+				System.out.println(entry.data + " not found.");
+			else
+				//System.out.println(entry.data + " appears in both documents.");
+		}
 		*/
 		
 		System.out.print("Denominator: " + FrequencyDivisor +"\n");
@@ -41,28 +50,28 @@ public class Correlator {
 	}
 	/**
 	 * Function uses a binary search algorithm to find key in array.
-	 * TODO NOT TESTED
 	 * @param array	- array to be searched
 	 * @param key	- query to be found
 	 * @return index of key if found, or -1 if not found.
 	 */
-	public static int find(DataCount<String>[] array, String key)
+	public static <E extends Comparable<? super E>> int find(DataCount<E>[] array, DataCount<E> key)
 	{
+		//System.out.println(" Searching for "+key.data);
 		int index=-1;
 		int min=0, max=array.length-1, mid;
 		boolean found=false;
 		while(!found&&(min<max)) {
 			
 			mid=(min+max)/2;
-			String current=array[mid].data;
-			
-			if(current.equals(key)) {
+			E current=array[mid].data;
+			//System.out.println(" Comparing "+current+" and "+key.data);
+			if(current.equals(key.data)) {
 				index=mid;
 				found=true;
 			}
 			else
 			{
-				if(current.compareTo(key)>0){	//follows
+				if(current.compareTo(key.data)<0){	//follows
 					min=mid+1;
 				}
 				else {	//precedes
