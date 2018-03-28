@@ -29,16 +29,19 @@ public class HashTable implements DataCounter<String> {
 	 * This creates a new array without blank spaces to return.
 	 */
     public DataCount<String>[] getCounts() {
-		System.out.print("Creating new array of size "+size+"\n");
+		//System.out.print("Creating new array of size "+size+"\n");
+    	//System.out.print(dump());
     	DataCount<String>[] counts =  new DataCount[size];
     	int i=0;
     	for(DataCount<String> hashCell : table) {
     		if(hashCell!=null) {
-    			counts[i]=new DataCount<String>(hashCell.data, 1);
+    			counts[i]=new DataCount<String>(hashCell.data, hashCell.count);
+    			//System.out.print("Added '"+counts[i].data+"',"+counts[i].count+" at "+i+"\n");
     			i++;
     		}
     	}
-        return table;
+    	
+        return counts;
     }
 
     public int getSize() {
@@ -66,6 +69,8 @@ public class HashTable implements DataCounter<String> {
 	    		table[hash]=new DataCount<String>(data, 1);
 	    		//System.out.print("'"+data+"' placed in "+hash+"\n");
 	    		found=true;
+	    		//only increment on fresh entry
+	    		size++;
 	    		
 	    	}else{
 	    		//System.out.print("Collision detected placing '" + data+"' into '"+table[hash].data+"' at "+hash+"\n");
@@ -92,7 +97,6 @@ public class HashTable implements DataCounter<String> {
     		}
     	}
 		//System.out.print("Successfully placed '" + data+"' into '"+table[hash].data+"' at "+hash+"\n");
-		size++;
     }
     
     public String dump(){
