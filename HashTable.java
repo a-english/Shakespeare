@@ -24,8 +24,12 @@ public class HashTable implements DataCounter<String> {
 		table=new DataCount[SIZE];
 		size=0;
 	}
-
+	/*
+	 * Original table contains blank spaces.
+	 * This creates a new array without blank spaces to return.
+	 */
     public DataCount<String>[] getCounts() {
+		System.out.print("Creating new array of size "+size+"\n");
     	DataCount<String>[] counts =  new DataCount[size];
     	int i=0;
     	for(DataCount<String> hashCell : table) {
@@ -34,7 +38,7 @@ public class HashTable implements DataCounter<String> {
     			i++;
     		}
     	}
-        return counts;
+        return table;
     }
 
     public int getSize() {
@@ -64,15 +68,16 @@ public class HashTable implements DataCounter<String> {
 	    		found=true;
 	    		
 	    	}else{
-	        	System.out.print(dump());
-	        	promptEnterKey();
-	    		System.out.print("Collision detected with '" + table[hash].data+"' at "+hash+"\n");
+	    		System.out.print("Collision detected placing '" + data+"' into '"+table[hash].data+"' at "+hash+"\n");
+	        	//promptEnterKey();
+	        	//System.out.print(dump());
 	    		//if it is full, two things may have happened
 	    		//1. either this is the same element and should be incremented
 	    		//2. or the hash needs to be run again
     			if (table[hash].data.equals(data))
     			{
     				//case 1
+    	    		System.out.print("Same value. Incrementing.\n");
     				table[hash].count++;
     				found=true;
     			}
@@ -86,6 +91,7 @@ public class HashTable implements DataCounter<String> {
     			}
     		}
     	}
+		System.out.print("Successfully placed '" + data+"' into '"+table[hash].data+"' at "+hash+"\n");
     }
     
     public String dump(){
