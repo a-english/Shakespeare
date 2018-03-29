@@ -1,15 +1,17 @@
 
 public class Correlator {
 
-	public static final Double Frequency = 0.001;
-	public static final int FrequencyDivisor = (new Double(1/Frequency)).intValue();
+	//public static final Double OutlierFrequency = 0.001;
+	//public static final int FrequencyDivisor = (new Double(1/OutlierFrequency)).intValue();
+	public static final Double upperBound = 0.01;
+	public static final Double lowerBound = 0.0001;
 	
 	public static void usage(){
 		System.out.print("This program compares the word frequency of two different txt files.\n"+
 		"Usage:	java Correlator [ -b | -a | -h ] <filename1> <filename2>\n"+
-		"-b\tUse an Unbalanced BST to implement the DataCounter\n"+
-		"-a\tUse an AVL Tree\n"+
-		"-h\tUse a Hashtable\n");
+		"-b\tUse an Unbalanced BST in the backend\n"+
+		"-a\tUse an AVL Tree in the backend\n"+
+		"-h\tUse a Hashtable in the backend\n");
 	}
 
 	public static void main(String[] args) {
@@ -34,27 +36,88 @@ public class Correlator {
 		for(int i=0; i<length; i++){
 			System.out.println(dc1[i].data+" "+dc1[i].count+"\t"+dc2[i].data+" "+dc2[i].count);
 		}
-		
-		int index;
-		for(DataCount entry : dc1) {
-			index=find(dc2, entry);
-			if(index==-1)
-				System.out.println(entry.data + " not found.");
-			else
-				//System.out.println(entry.data + " appears in both documents.");
-		}
 		*/
+		int index;
+		String word;
+		double freq1, freq2;
+		for(DataCount entry : dc1) {
+			word=(String) entry.data;
+			index=find(dc2, word);
+			if(index!=-1) {
+				//System.out.print("'"+entry.data+"' in "+filename1+" " );
+				freq1=getFrequency(word, dc1);
+				freq2=getFrequency(word, dc2);
+				if(
+						freq1>lowerBound
+						&&freq1<upperBound
+						&&freq2>lowerBound
+						&&freq2<upperBound) {
+					System.out.printf("'%s'\tin '%s': %.4f\n", entry.data, filename1, freq1);
+					System.out.printf("\tin '%s': %.4f\n\n", filename2, freq2);
+				}
+				
+			}
+		}
 		
-		System.out.print("Denominator: " + FrequencyDivisor +"\n");
+		
+		
+		
+		
+		
+		//System.out.print("Denominator: " + FrequencyDivisor +"\n");
 		
 	}
+	
+	/**
+	 * Finds the percentage of the text that is composed of this word
+	 * @param word
+	 * @param document
+	 * @return percentage
+	 */
+	static double getFrequency(String word, DataCount<String>[] document) {
+		int index=find(document, word);
+		if(index==-1)
+			return 0;
+		double freq=document[index].count;
+		double total=getWordCount(document);
+		//System.out.print("'"+word+"' : "+freq+"/"+total+"\n" );
+		return freq/total;
+	}
+	
+	/**
+	 * Finds the total number of words in document based on data structure
+	 * @param DataCount array
+	 * @return word count
+	 */
+	
+	static int getWordCount(DataCount<String>[] document) {
+		int sum=0;
+		for(int i=0; i<document.length; i++) {
+			sum+=document[i].count;
+		}
+		return sum;
+	}
+	
+	/*
+	 * Instead of this, maybe just only process words if they're above the frequency?
+	 * @param oldArray
+	 * @return
+	public static<E extends Comparable<? super E>> DataCount<E>[] normalize(DataCount<E>[] oldArray){
+		int wordcount=array.length;
+		int newSize=wordcount;
+		DataCount<E>[] newArray= new DataCount<E>[]
+		for()
+		return array;
+	}
+	 */
+	
 	/**
 	 * Function uses a binary search algorithm to find key in array.
 	 * @param array	- array to be searched
 	 * @param key	- query to be found
 	 * @return index of key if found, or -1 if not found.
 	 */
-	public static <E extends Comparable<? super E>> int find(DataCount<E>[] array, DataCount<E> key)
+	public static int find(DataCount<String>[] array, String key)
 	{
 		//System.out.println(" Searching for "+key.data);
 		int index=-1;
@@ -63,15 +126,15 @@ public class Correlator {
 		while(!found&&(min<max)) {
 			
 			mid=(min+max)/2;
-			E current=array[mid].data;
+			String current=array[mid].data;
 			//System.out.println(" Comparing "+current+" and "+key.data);
-			if(current.equals(key.data)) {
+			if(current.equals(key)) {
 				index=mid;
 				found=true;
 			}
 			else
 			{
-				if(current.compareTo(key.data)<0){	//follows
+				if(current.compareTo(key)<0){	//follows
 					min=mid+1;
 				}
 				else {	//precedes
