@@ -26,6 +26,8 @@ count.pl
 				user    0.204s
 				sys		0.046s
 				
-Time taken on BST: 140ms
-Time taken on AVL: 5601ms
-Time taken on Hash table: 140ms
+Time taken on perl: 320ms
+Time taken on shell: 265ms
+Time taken on BST: 156ms
+Time taken on AVL: 6562ms
+Time taken on Hash table: 125ms

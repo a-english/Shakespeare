@@ -136,7 +136,7 @@ public class WordCount {
         //System.out.print("Size of counter: "+counter.getSize()+"\n");
     	DataCount<String>[] counts = wc.counter.getCounts();
         //System.out.print(counter.dump());
-        sortByDescendingCount(counts);
+        //sortByDescendingCount(counts);
 
         //System.out.print("Size of counts: "+counts.length+"\n");
         //System.out.print("0: "+counts[0]+"\n");
