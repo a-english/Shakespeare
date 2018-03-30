@@ -1,8 +1,6 @@
 
 public class Correlator {
 
-	//public static final Double OutlierFrequency = 0.001;
-	//public static final int FrequencyDivisor = (new Double(1/OutlierFrequency)).intValue();
 	public static final Double upperBound = 0.01;
 	public static final Double lowerBound = 0.0001;
 	
@@ -14,7 +12,24 @@ public class Correlator {
 		"-h\tUse a Hashtable in the backend\n");
 	}
 
+	/**
+	 * My test function, delete later
+	 */
+	private static void pseudomain() {
+		String[] Shakespeares= {"hamlet","midsummer","sonnets"};
+		String[] Bacons= {"the-new-atlantis","bacon"};
+		String[] Other= {"bible","oedipus", "catcher-in-the-rye"};
+		
+		double shakespeare_shakespeare,shakespeare_bacon, shakespeare_other;
+		for(String SSfilename : Shakespeares) {
+			
+		}
+	}
+	
 	public static void main(String[] args) {
+		if(args.length==0) {
+			pseudomain();
+		}
         if (args.length != 3) {
             usage();
             System.exit(1);
@@ -22,50 +37,50 @@ public class Correlator {
         String structureType = args[0],
         	   filename1 = args[1],
         	   filename2 = args[2];
+		//dc1 and dc2 now contain separate arrays populated with words, sorted alphabetically.
+		
+		double diffMetric=getDifferenceMetric(args[0], args[1], args[2]);
+		
+		System.out.print("Difference metric between "+filename1+" and "+filename2+": "+diffMetric+
+				"\n\tUsing normalizers ("+lowerBound+","+upperBound+")");
+		
+	}
+	
+	/**
+	 * Finds difference metric by taking the Euclidean distance between two frequencies.
+	 */
+	
+	/**
+	 * 
+	 * @param dc1 Array to be compared
+	 * @param dc2 Array to be compared
+	 * @returns difference metric
+	 */
+	//private static double getDifferenceMetric(DataCount<String>[] dc1, DataCount<String>[] dc2) {
+	private static double getDifferenceMetric(String structureType, String filename1, String filename2) {
 		DataCount<String>[] dc1, dc2;
 		//oh my god that's ugly
 		dc1=(new WordCount(filename1, structureType).getCount().getCounts());
 		dc2=(new WordCount(filename2, structureType).getCount().getCounts());
-		//dc1 and dc2 now contain separate arrays populated with words, sorted alphabetically.
-		int length;
-		if(dc1.length>dc2.length)
-			length=dc1.length;
-		else	length=dc2.length;
-		
-		/*
-		for(int i=0; i<length; i++){
-			System.out.println(dc1[i].data+" "+dc1[i].count+"\t"+dc2[i].data+" "+dc2[i].count);
-		}
-		*/
 		int index;
 		String word;
 		double freq1, freq2;
-		for(DataCount entry : dc1) {
+		double diffMetric=0;
+		for(DataCount<String> entry : dc1) {
 			word=(String) entry.data;
 			index=find(dc2, word);
 			if(index!=-1) {
-				//System.out.print("'"+entry.data+"' in "+filename1+" " );
 				freq1=getFrequency(word, dc1);
 				freq2=getFrequency(word, dc2);
-				if(
-						freq1>lowerBound
-						&&freq1<upperBound
-						&&freq2>lowerBound
-						&&freq2<upperBound) {
-					System.out.printf("'%s'\tin '%s': %.4f\n", entry.data, filename1, freq1);
-					System.out.printf("\tin '%s': %.4f\n\n", filename2, freq2);
+				if(		(freq1>lowerBound&&freq1<upperBound)&&
+						(freq2>lowerBound&&freq2<upperBound)		) {
+					diffMetric+=((freq1-freq2)*(freq1-freq2));
+					
 				}
 				
 			}
 		}
-		
-		
-		
-		
-		
-		
-		//System.out.print("Denominator: " + FrequencyDivisor +"\n");
-		
+		return diffMetric;
 	}
 	
 	/**
@@ -74,7 +89,7 @@ public class Correlator {
 	 * @param document
 	 * @return percentage
 	 */
-	static double getFrequency(String word, DataCount<String>[] document) {
+	private static double getFrequency(String word, DataCount<String>[] document) {
 		int index=find(document, word);
 		if(index==-1)
 			return 0;
@@ -90,7 +105,7 @@ public class Correlator {
 	 * @return word count
 	 */
 	
-	static int getWordCount(DataCount<String>[] document) {
+	private static int getWordCount(DataCount<String>[] document) {
 		int sum=0;
 		for(int i=0; i<document.length; i++) {
 			sum+=document[i].count;
@@ -98,18 +113,6 @@ public class Correlator {
 		return sum;
 	}
 	
-	/*
-	 * Instead of this, maybe just only process words if they're above the frequency?
-	 * @param oldArray
-	 * @return
-	public static<E extends Comparable<? super E>> DataCount<E>[] normalize(DataCount<E>[] oldArray){
-		int wordcount=array.length;
-		int newSize=wordcount;
-		DataCount<E>[] newArray= new DataCount<E>[]
-		for()
-		return array;
-	}
-	 */
 	
 	/**
 	 * Function uses a binary search algorithm to find key in array.
