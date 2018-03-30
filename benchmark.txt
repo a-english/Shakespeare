@@ -1,0 +1,31 @@
+count.sh
+--------------------------------
+	No input:	real	0.530s
+				user	0.076s
+				sys		0.303s
+				
+	hamlet.txt:	real	0.850s
+				user	0.697s
+				sys		0.212s
+				
+	Difference:	real	0.320s
+				user   -0.621s
+				sys		0.091s
+				
+count.pl
+--------------------------------
+	No input:	real	0.047s
+				user	0.030s
+				sys		0.000s
+				
+	hamlet.txt:	real	0.312s
+				user	0.234s
+				sys		0.046s
+				
+	Difference:	real	0.265s
+				user    0.204s
+				sys		0.046s
+				
+Time taken on BST: 140ms
+Time taken on AVL: 5601ms
+Time taken on Hash table: 140ms

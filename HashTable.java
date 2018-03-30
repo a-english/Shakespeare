@@ -64,6 +64,7 @@ public class HashTable implements DataCounter<String> {
 		int i=1;
 		while(!found){
 			//System.out.print("Trying "+hash+"\n");
+			//if(hash<0) {hash*=-1;}//large numbers sometimes cause int overflow
 	    	if(table[hash]==null){
 	    		//if that spot is empty, store the new entry.
 	    		table[hash]=new DataCount<String>(data, 1);
@@ -93,7 +94,7 @@ public class HashTable implements DataCounter<String> {
     				hash=hash+i*i;
     				hash=hash%SIZE;
     				i++;
-    				//System.out.print("Trying "+hash+"\n");
+    				//System.out.print("i "+i+"\n");
     			}
     		}
     	}

@@ -13,7 +13,7 @@ public class Correlator {
 	}
 	
 	public static void main(String[] args) {
-		
+		//LexAnalysis();
         if (args.length != 3) {
             usage();
             System.exit(1);
@@ -153,14 +153,14 @@ public class Correlator {
 		String[] Shakespeares= {"hamlet","midsummer","sonnets","othello"};
 		String[] Bacons= {"the-new-atlantis"};
 		String[] Others= {"bible","oedipus", "catcher-in-the-rye","pride-and-prejudice","tom-sawyer"};
-		
+		String struct="-b";
 		double shakespeareF,baconF, otherF, temp;
 		double SSsum=0, baconSum=0, otherSum=0;
 		for(String shakespeare : Shakespeares) {
 			for(String control: Shakespeares) {
 				//ignore double case
 				if(!control.equals(shakespeare)) {
-					temp=getDifferenceMetric("-b",
+					temp=getDifferenceMetric(struct,
 							"texts/"+shakespeare+".txt",
 							"texts/"+control+".txt");
 					System.out.println(shakespeare+" and "+control+": "+temp);
@@ -168,14 +168,14 @@ public class Correlator {
 				}
 			}
 			for(String bacon: Bacons) {
-				temp=getDifferenceMetric("-b",
+				temp=getDifferenceMetric(struct,
 						"texts/"+shakespeare+".txt",
 						"texts/"+bacon+".txt");
 				System.out.println(shakespeare+" and "+bacon+": "+temp);
 				baconSum+=temp;
 			}
 			for(String other: Others) {
-				temp=getDifferenceMetric("-b",
+				temp=getDifferenceMetric(struct,
 						"texts/"+shakespeare+".txt",
 						"texts/"+other+".txt");
 				System.out.println(shakespeare+" and "+other+": "+temp);

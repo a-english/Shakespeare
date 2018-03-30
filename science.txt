@@ -1,0 +1,40 @@
+hamlet and midsummer: 7.716389575446257E-5
+hamlet and sonnets: 3.477469992085834E-4
+hamlet and othello: 4.9932378773111375E-5
+hamlet and the-new-atlantis: 1.8893587657764653E-4
+hamlet and bible: 1.8164386507075656E-4
+hamlet and oedipus: 7.91342449216272E-5
+hamlet and catcher-in-the-rye: 2.1929300637554564E-4
+hamlet and pride-and-prejudice: 1.1944081209222477E-4
+hamlet and tom-sawyer: 1.6136113278756003E-4
+midsummer and hamlet: 7.716389575446257E-5
+midsummer and sonnets: 3.502486883536768E-4
+midsummer and othello: 5.905178491841645E-5
+midsummer and the-new-atlantis: 2.1788528246881623E-4
+midsummer and bible: 4.1523459119243187E-4
+midsummer and oedipus: 1.7038958585025978E-4
+midsummer and catcher-in-the-rye: 3.201378566711034E-4
+midsummer and pride-and-prejudice: 1.811573897541103E-4
+midsummer and tom-sawyer: 2.244619896999954E-4
+sonnets and hamlet: 3.477469992085834E-4
+sonnets and midsummer: 3.502486883536768E-4
+sonnets and othello: 3.4762847991586833E-4
+sonnets and the-new-atlantis: 3.938568991909618E-4
+sonnets and bible: 3.340038914283402E-4
+sonnets and oedipus: 2.1818654219786797E-4
+sonnets and catcher-in-the-rye: 2.6262552364488505E-4
+sonnets and pride-and-prejudice: 3.29745393922663E-4
+sonnets and tom-sawyer: 3.874903696492346E-4
+othello and hamlet: 4.9932378773111375E-5
+othello and midsummer: 5.905178491841645E-5
+othello and sonnets: 3.4762847991586833E-4
+othello and the-new-atlantis: 1.0498229731482983E-4
+othello and bible: 2.710136008048761E-4
+othello and oedipus: 1.2387199399680566E-4
+othello and catcher-in-the-rye: 1.6758793463854952E-4
+othello and pride-and-prejudice: 1.2100771570346999E-4
+othello and tom-sawyer: 1.1282255652429156E-4
+===============================
+Average Shakespeare and Shakespear:	1.5397152836551484E-4
+Average Shakespeare and Bacon:		2.2641508888806362E-4
+Average Shakespeare and Other:		2.2003049984632987E-4
